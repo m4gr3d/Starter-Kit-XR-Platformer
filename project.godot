@@ -109,3 +109,9 @@ zoom_out={
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 anti_aliasing/quality/screen_space_aa=1
+
+[xr]
+
+openxr/enabled=true
+openxr/reference_space=2
+shaders/enabled=true
