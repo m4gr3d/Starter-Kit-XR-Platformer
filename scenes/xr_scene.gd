@@ -11,8 +11,3 @@ func _ready() -> void:
 		
 		# Disable vsync
 		DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
