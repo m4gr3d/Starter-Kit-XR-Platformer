@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://scripts/hud.gd" id="11_apvpm"]
 [ext_resource type="Script" path="res://scenes/xr_scene.gd" id="13_71qo1"]
 [ext_resource type="PackedScene" uid="uid://dy017k58p20sk" path="res://objects/cloud.tscn" id="13_drtpy"]
-[ext_resource type="Texture2D" uid="uid://cd7oyc56ehkx1" path="res://sprites/coin.png" id="13_jfda3"]
+[ext_resource type="Texture2D" uid="uid://bbkkc0hhclhyp" path="res://sprites/coin.png" id="13_jfda3"]
 [ext_resource type="FontFile" uid="uid://d0cxd77jybrcn" path="res://fonts/lilita_one_regular.ttf" id="17_tk810"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_38ys3"]
@@ -158,17 +158,19 @@ script = ExtResource("13_71qo1")
 
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
 
-[node name="LeftXRController3D" type="XRController3D" parent="XROrigin3D"]
+[node name="LeftXRController" type="XRController3D" parent="XROrigin3D"]
 tracker = &"left_hand"
 pose = &"grip"
 
-[node name="LeftControllerRenderModel" type="OpenXRFbRenderModel" parent="XROrigin3D/LeftXRController3D"]
+[node name="LeftControllerRenderModel" type="OpenXRFbRenderModel" parent="XROrigin3D/LeftXRController"]
 
-[node name="RightXRController3D" type="XRController3D" parent="XROrigin3D"]
+[node name="RightXRController" type="XRController3D" parent="XROrigin3D"]
 tracker = &"right_hand"
 pose = &"grip"
 
-[node name="RightControllerRenderModel" type="OpenXRFbRenderModel" parent="XROrigin3D/RightXRController3D"]
+[node name="RightControllerRenderModel" type="OpenXRFbRenderModel" parent="XROrigin3D/RightXRController"]
 render_model_type = 1
 
 [connection signal="coin_collected" from="Player" to="HUD" method="_on_coin_collected"]
+[connection signal="button_released" from="XROrigin3D/LeftXRController" to="Player" method="_on_xr_controller_button_released"]
+[connection signal="button_released" from="XROrigin3D/RightXRController" to="Player" method="_on_xr_controller_button_released"]

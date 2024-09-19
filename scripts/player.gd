@@ -20,12 +20,18 @@ var jump_double = true
 
 var coins = 0
 
+var left_xr_controller: XRController3D = null
+
 @onready var particles_trail = $ParticlesTrail
 @onready var sound_footsteps = $SoundFootsteps
 @onready var model = $Character
 @onready var animation = $Character/AnimationPlayer
 
 # Functions
+
+func _ready() -> void:
+	left_xr_controller = get_node_or_null("/root/Main/XROrigin3D/LeftXRController")
+
 
 func _physics_process(delta):
 
@@ -103,9 +109,13 @@ func handle_controls(delta):
 	# Movement
 
 	var input := Vector3.ZERO
-
-	input.x = Input.get_axis("move_left", "move_right")
-	input.z = Input.get_axis("move_forward", "move_back")
+	if left_xr_controller:
+		var joystick_value = left_xr_controller.get_vector2("primary")
+		input.x = joystick_value.x
+		input.z = -joystick_value.y
+	else:
+		input.x = Input.get_axis("move_left", "move_right")
+		input.z = Input.get_axis("move_forward", "move_back")
 
 	input = input.rotated(Vector3.UP, view.rotation.y)
 
@@ -155,3 +165,8 @@ func collect_coin():
 	coins += 1
 
 	coin_collected.emit(coins)
+
+
+func _on_xr_controller_button_released(name: String) -> void:
+	if name == "ax_button" and (jump_single or jump_double):
+		jump()
