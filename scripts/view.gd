@@ -14,10 +14,12 @@ extends Node3D
 var camera_rotation:Vector3
 var zoom = 10
 
+var right_xr_controller: XRController3D = null
+
 @onready var camera = $Camera
 
 func _ready():
-	
+	right_xr_controller = get_node_or_null("/root/Main/XROrigin3D/LeftXRController")
 	camera_rotation = rotation_degrees # Initial rotation
 	
 	pass
@@ -48,6 +50,11 @@ func handle_input(delta):
 	camera_rotation.x = clamp(camera_rotation.x, -80, -10)
 	
 	# Zooming
+	if right_xr_controller:
+		var joystick_value = right_xr_controller.get_vector2("primary")
+		zoom += joystick_value.y * zoom_speed * delta
+		print("Updated zoom to " + str(zoom))
 	
 	zoom += Input.get_axis("zoom_in", "zoom_out") * zoom_speed * delta
 	zoom = clamp(zoom, zoom_maximum, zoom_minimum)
+	print("Clamped zoom to " + str(zoom))

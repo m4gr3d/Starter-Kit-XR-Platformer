@@ -6,6 +6,7 @@
 *.png.import
 export.cfg
 export_presets.cfg
+.editorconfig
 
 # Imported translations (automatically generated from CSV files)
 *.translation
@@ -17,3 +18,4 @@ mono_crash.*.json
 
 # Kenney ignores
 build/
+
