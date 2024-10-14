@@ -48,8 +48,9 @@ func _physics_process(delta):
 
 	var applied_velocity: Vector3
 
-	applied_velocity = velocity.lerp(movement_velocity, delta * 10)
-	applied_velocity.y = -gravity
+	var global_transform_scale = global_transform.basis.get_scale()
+	applied_velocity = velocity.lerp(movement_velocity * global_transform_scale, delta * 10)
+	applied_velocity.y = -gravity * global_transform_scale.length()
 
 	velocity = applied_velocity
 	move_and_slide()
@@ -86,8 +87,9 @@ func handle_effects(delta):
 	sound_footsteps.stream_paused = true
 
 	if is_on_floor():
+		var scaled_movement_speed = movement_speed * global_transform.basis.get_scale().x
 		var horizontal_velocity = Vector2(velocity.x, velocity.z)
-		var speed_factor = horizontal_velocity.length() / movement_speed / delta
+		var speed_factor = horizontal_velocity.length() / scaled_movement_speed / delta
 		if speed_factor > 0.05:
 			if animation.current_animation != "walk":
 				animation.play("walk", 0.1)
