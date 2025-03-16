@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://bqqgyqafm7xwp"]
 
 [ext_resource type="Environment" uid="uid://bqnqgflivjvue" path="res://scenes/main-environment.tres" id="1_ahusb"]
-[ext_resource type="Script" path="res://scripts/xr_view.gd" id="2_4flxn"]
+[ext_resource type="Script" uid="uid://be8l4ew11ocwe" path="res://scripts/xr_view.gd" id="2_4flxn"]
 [ext_resource type="PackedScene" uid="uid://dl2ed4gkybggf" path="res://objects/player.tscn" id="2_onms2"]
 [ext_resource type="PackedScene" uid="uid://cnymdajj1vsqm" path="res://objects/platform.tscn" id="6_sdmev"]
 [ext_resource type="PackedScene" uid="uid://rjh4ifidqrfp" path="res://objects/platform_medium.tscn" id="7_ixpj3"]
@@ -9,10 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://c8up71en5djgm" path="res://objects/platform_falling.tscn" id="9_2fnpo"]
 [ext_resource type="PackedScene" uid="uid://dtjvjdjl8cs6e" path="res://models/flag.glb" id="9_fw1f5"]
 [ext_resource type="PackedScene" uid="uid://dfpisimsgf5ce" path="res://objects/coin.tscn" id="10_fwhys"]
-[ext_resource type="Script" path="res://scripts/hud.gd" id="11_apvpm"]
-[ext_resource type="Script" path="res://scripts/xr_scene.gd" id="13_71qo1"]
+[ext_resource type="Script" uid="uid://b2cibk2ta1u70" path="res://scripts/hud.gd" id="11_apvpm"]
+[ext_resource type="Script" uid="uid://fnvsebj8u6xi" path="res://scripts/xr_scene.gd" id="13_71qo1"]
 [ext_resource type="PackedScene" uid="uid://dy017k58p20sk" path="res://objects/cloud.tscn" id="13_drtpy"]
-[ext_resource type="Texture2D" uid="uid://cv6xuvaanqx5i" path="res://sprites/coin.png" id="13_jfda3"]
+[ext_resource type="Texture2D" uid="uid://c86jl55cbqdmp" path="res://sprites/coin.png" id="13_jfda3"]
 [ext_resource type="FontFile" uid="uid://d0cxd77jybrcn" path="res://fonts/lilita_one_regular.ttf" id="17_tk810"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_38ys3"]

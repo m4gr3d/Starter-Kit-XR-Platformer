@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=4 uid="uid://dfpisimsgf5ce"]
 
-[ext_resource type="Texture2D" uid="uid://c54nv335f44b6" path="res://models/Textures/colormap.png" id="2_04qt4"]
-[ext_resource type="Script" path="res://objects/coin.gd" id="2_gaakh"]
-[ext_resource type="Texture2D" uid="uid://c40btq1346txh" path="res://sprites/particle.png" id="3_xl1k0"]
+[ext_resource type="Texture2D" uid="uid://ckr58bgiotcvu" path="res://models/Textures/colormap.png" id="2_04qt4"]
+[ext_resource type="Script" uid="uid://bfys6cqghcihy" path="res://objects/coin.gd" id="2_gaakh"]
+[ext_resource type="Texture2D" uid="uid://wpid3i4p4v2i" path="res://sprites/particle.png" id="3_xl1k0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ct61v"]
 resource_name = "colormap"
