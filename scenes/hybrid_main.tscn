@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://debce0k84oc78"]
+
+[ext_resource type="Script" uid="uid://dmxufx6we8c11" path="res://scripts/hybrid_main.gd" id="1_r10rv"]
+[ext_resource type="PackedScene" uid="uid://bqqgyqafm7xwp" path="res://scenes/main.tscn" id="2_syj3l"]
+
+[node name="HybridMain" type="Node3D"]
+script = ExtResource("1_r10rv")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+
+[node name="Main" parent="." instance=ExtResource("2_syj3l")]
