@@ -10,4 +10,17 @@ script = ExtResource("1_r10rv")
 
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
 
+[node name="LeftXRController3D" type="XRController3D" parent="XROrigin3D"]
+tracker = &"left_hand"
+pose = &"grip"
+
+[node name="OpenXRFbRenderModel" type="OpenXRFbRenderModel" parent="XROrigin3D/LeftXRController3D"]
+
+[node name="RightXRController3D" type="XRController3D" parent="XROrigin3D"]
+tracker = &"right_hand"
+pose = &"grip"
+
+[node name="OpenXRFbRenderModel" type="OpenXRFbRenderModel" parent="XROrigin3D/RightXRController3D"]
+render_model_type = 1
+
 [node name="Main" parent="." instance=ExtResource("2_syj3l")]
