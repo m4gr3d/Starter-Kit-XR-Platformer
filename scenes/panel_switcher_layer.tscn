@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bks8wvmafjd8w"]
+
+[ext_resource type="Script" uid="uid://ut0koe0ubynk" path="res://scripts/panel_switcher_layer.gd" id="1_6a0lm"]
+[ext_resource type="PackedScene" uid="uid://doq7eof7k2k5r" path="res://scenes/panel_switcher.tscn" id="1_y8xrs"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_y8xrs"]
+size = Vector2(0.015, 0.015)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y8xrs"]
+shading_mode = 0
+
+[node name="PanelSwitcherLayer" type="OpenXRCompositionLayerQuad" node_paths=PackedStringArray("layer_viewport")]
+layer_viewport = NodePath("SubViewport")
+sort_order = -1
+enable_hole_punch = true
+quad_size = Vector2(0.5, 0.5)
+script = ExtResource("1_6a0lm")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="PanelSwitcher" parent="SubViewport" instance=ExtResource("1_y8xrs")]
+unique_name_in_owner = true
+offset_right = 0.0
+offset_bottom = 0.0
+
+[node name="Cursor" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.005)
+mesh = SubResource("QuadMesh_y8xrs")
+surface_material_override/0 = SubResource("StandardMaterial3D_y8xrs")

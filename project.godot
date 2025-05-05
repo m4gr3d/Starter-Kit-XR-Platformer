@@ -15,8 +15,8 @@ config/tags=PackedStringArray("starterkit")
 run/main_scene="uid://debce0k84oc78"
 config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/bg_color=Color(0.92549, 0.92549, 0.960784, 1)
-config/icon="res://icon.png"
 boot_splash/image="res://splash-screen.png"
+config/icon="res://icon.png"
 
 [autoload]
 
@@ -108,13 +108,17 @@ zoom_out={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_s3tc_bptc=true
+textures/vram_compression/import_etc2_astc=true
 anti_aliasing/quality/screen_space_aa=1
 
 [xr]
 
 openxr/enabled=true
 openxr/reference_space=2
+openxr/foveation_level=3
+openxr/foveation_dynamic=true
 shaders/enabled=true
+openxr/extensions/meta/render_model=true
 hybrid_app/enabled=true
 hybrid_app/launch_mode=1
-openxr/extensions/meta/render_model=true

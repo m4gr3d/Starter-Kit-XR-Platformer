@@ -7,14 +7,15 @@
 script = ExtResource("1_r10rv")
 
 [node name="XROrigin3D" type="XROrigin3D" parent="."]
-
-[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 5, 3.78522, 5)
 
 [node name="LeftXRController3D" type="XRController3D" parent="XROrigin3D"]
 tracker = &"left_hand"
 pose = &"grip"
 
 [node name="OpenXRFbRenderModel" type="OpenXRFbRenderModel" parent="XROrigin3D/LeftXRController3D"]
+
+[node name="PanelSwitcherHolder" type="Node3D" parent="XROrigin3D/LeftXRController3D"]
 
 [node name="RightXRController3D" type="XRController3D" parent="XROrigin3D"]
 tracker = &"right_hand"
@@ -24,3 +25,5 @@ pose = &"grip"
 render_model_type = 1
 
 [node name="Main" parent="." instance=ExtResource("2_syj3l")]
+
+[connection signal="button_pressed" from="XROrigin3D/LeftXRController3D" to="." method="_on_left_xr_controller_3d_button_pressed"]

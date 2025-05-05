@@ -15,10 +15,32 @@ var gravity = 0
 
 var previously_floored = false
 
+var jump_queued = false
 var jump_single = true
 var jump_double = true
 
 var coins = 0
+
+var player_data := {}
+
+# These will be set by the main logic based on the hybrid mode
+var left_xr_controller: XRController3D:
+	set(value):
+		if left_xr_controller:
+			left_xr_controller.button_pressed.disconnect(_on_xr_controller_button_pressed)
+			
+		left_xr_controller = value
+		if left_xr_controller:
+			left_xr_controller.button_pressed.connect(_on_xr_controller_button_pressed)
+
+var right_xr_controller: XRController3D:
+	set(value):
+		if right_xr_controller:
+			right_xr_controller.button_pressed.disconnect(_on_xr_controller_button_pressed)
+		
+		right_xr_controller = value
+		if right_xr_controller:
+			right_xr_controller.button_pressed.connect(_on_xr_controller_button_pressed)
 
 @onready var particles_trail = $ParticlesTrail
 @onready var sound_footsteps = $SoundFootsteps
@@ -40,8 +62,9 @@ func _physics_process(delta):
 
 	var applied_velocity: Vector3
 
-	applied_velocity = velocity.lerp(movement_velocity, delta * 10)
-	applied_velocity.y = -gravity
+	var global_transform_scale = global_transform.basis.get_scale()
+	applied_velocity = velocity.lerp(movement_velocity * global_transform_scale, delta * 10)
+	applied_velocity.y = -gravity * global_transform_scale.length()
 
 	velocity = applied_velocity
 	move_and_slide()
@@ -69,6 +92,9 @@ func _physics_process(delta):
 		Audio.play("res://sounds/land.ogg")
 
 	previously_floored = is_on_floor()
+	
+	# Store the player's location
+	player_data['location'] = global_transform
 
 # Handle animation(s)
 
@@ -78,8 +104,9 @@ func handle_effects(delta):
 	sound_footsteps.stream_paused = true
 
 	if is_on_floor():
+		var scaled_movement_speed = movement_speed * global_transform.basis.get_scale().x
 		var horizontal_velocity = Vector2(velocity.x, velocity.z)
-		var speed_factor = horizontal_velocity.length() / movement_speed / delta
+		var speed_factor = horizontal_velocity.length() / scaled_movement_speed / delta
 		if speed_factor > 0.05:
 			if animation.current_animation != "walk":
 				animation.play("walk", 0.1)
@@ -106,6 +133,11 @@ func handle_controls(delta):
 
 	input.x = Input.get_axis("move_left", "move_right")
 	input.z = Input.get_axis("move_forward", "move_back")
+	
+	if left_xr_controller:
+		var joystick_value = left_xr_controller.get_vector2("primary")
+		input.x += joystick_value.x
+		input.z += -joystick_value.y
 
 	input = input.rotated(Vector3.UP, view.rotation.y)
 
@@ -116,7 +148,8 @@ func handle_controls(delta):
 
 	# Jumping
 
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") or jump_queued:
+		jump_queued = false
 
 		if jump_single or jump_double:
 			jump()
@@ -155,3 +188,8 @@ func collect_coin():
 	coins += 1
 
 	coin_collected.emit(coins)
+	player_data["coins"] = coins
+
+func _on_xr_controller_button_pressed(button_name: String) -> void:
+	if button_name == "ax_button":
+		jump_queued = true
