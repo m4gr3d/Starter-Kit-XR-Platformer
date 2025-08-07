@@ -15,12 +15,16 @@ config/tags=PackedStringArray("starterkit")
 run/main_scene="uid://debce0k84oc78"
 config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/bg_color=Color(0.92549, 0.92549, 0.960784, 1)
-config/icon="res://icon.png"
 boot_splash/image="res://splash-screen.png"
+config/icon="res://icon.png"
 
 [autoload]
 
 Audio="*res://scripts/audio.gd"
+
+[debug]
+
+settings/stdout/verbose_stdout=true
 
 [display]
 

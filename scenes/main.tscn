@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c8up71en5djgm" path="res://objects/platform_falling.tscn" id="9_2fnpo"]
 [ext_resource type="PackedScene" uid="uid://dtjvjdjl8cs6e" path="res://models/flag.glb" id="9_fw1f5"]
 [ext_resource type="PackedScene" uid="uid://dfpisimsgf5ce" path="res://objects/coin.tscn" id="10_fwhys"]
-[ext_resource type="Script" uid="uid://d0c8uxfole3g5" path="res://scripts/hud.gd" id="11_apvpm"]
+[ext_resource type="Script" uid="uid://b2cibk2ta1u70" path="res://scripts/hud.gd" id="11_apvpm"]
 [ext_resource type="PackedScene" uid="uid://dy017k58p20sk" path="res://objects/cloud.tscn" id="13_drtpy"]
 [ext_resource type="Texture2D" uid="uid://cd7oyc56ehkx1" path="res://sprites/coin.png" id="13_jfda3"]
 [ext_resource type="PackedScene" uid="uid://mgq0yvbhxv38" path="res://scenes/joystick_ui.tscn" id="15_jkv2x"]
@@ -142,6 +142,7 @@ shadow_opacity = 0.75
 script = ExtResource("11_apvpm")
 
 [node name="Icon" type="TextureRect" parent="HUD"]
+anchors_preset = -1
 offset_left = 57.0
 offset_top = 67.0
 offset_right = 313.0
@@ -150,6 +151,7 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("13_jfda3")
 
 [node name="x" type="Label" parent="HUD"]
+anchors_preset = -1
 offset_left = 112.0
 offset_top = 64.0
 offset_right = 144.0
@@ -158,6 +160,7 @@ text = "×"
 label_settings = SubResource("LabelSettings_38ys3")
 
 [node name="Coins" type="Label" parent="HUD"]
+anchors_preset = -1
 offset_left = 144.0
 offset_top = 64.0
 offset_right = 368.0
