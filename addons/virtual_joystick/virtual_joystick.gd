@@ -65,14 +65,9 @@ var _touch_index : int = -1
 # FUNCTIONS
 
 func _ready() -> void:
-	if ProjectSettings.get_setting("input_devices/pointing/emulate_mouse_from_touch"):
-		printerr("The Project Setting 'emulate_mouse_from_touch' should be set to False")
-	if not ProjectSettings.get_setting("input_devices/pointing/emulate_touch_from_mouse"):
-		printerr("The Project Setting 'emulate_touch_from_mouse' should be set to True")
-	
 	if not DisplayServer.is_touchscreen_available() and visibility_mode == Visibility_mode.TOUCHSCREEN_ONLY :
 		hide()
-	
+
 	if visibility_mode == Visibility_mode.WHEN_TOUCHED:
 		hide()
 
@@ -127,19 +122,19 @@ func _update_joystick(touch_position: Vector2) -> void:
 	var center : Vector2 = _base.global_position + _base_radius
 	var vector : Vector2 = touch_position - center
 	vector = vector.limit_length(clampzone_size)
-	
+
 	if joystick_mode == Joystick_mode.FOLLOWING and touch_position.distance_to(center) > clampzone_size:
 		_move_base(touch_position - vector)
-	
+
 	_move_tip(center + vector)
-	
+
 	if vector.length_squared() > deadzone_size * deadzone_size:
 		is_pressed = true
 		output = (vector - (vector.normalized() * deadzone_size)) / (clampzone_size - deadzone_size)
 	else:
 		is_pressed = false
 		output = Vector2.ZERO
-	
+
 	if use_input_actions:
 		# Release actions
 		if output.x >= 0 and Input.is_action_pressed(action_left):

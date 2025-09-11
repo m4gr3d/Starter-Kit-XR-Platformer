@@ -28,7 +28,7 @@ var left_xr_controller: XRController3D:
 	set(value):
 		if left_xr_controller:
 			left_xr_controller.button_pressed.disconnect(_on_xr_controller_button_pressed)
-			
+
 		left_xr_controller = value
 		if left_xr_controller:
 			left_xr_controller.button_pressed.connect(_on_xr_controller_button_pressed)
@@ -37,7 +37,7 @@ var right_xr_controller: XRController3D:
 	set(value):
 		if right_xr_controller:
 			right_xr_controller.button_pressed.disconnect(_on_xr_controller_button_pressed)
-		
+
 		right_xr_controller = value
 		if right_xr_controller:
 			right_xr_controller.button_pressed.connect(_on_xr_controller_button_pressed)
@@ -92,7 +92,7 @@ func _physics_process(delta):
 		Audio.play("res://sounds/land.ogg")
 
 	previously_floored = is_on_floor()
-	
+
 	# Store the player's location
 	player_data['location'] = global_transform
 
@@ -133,7 +133,7 @@ func handle_controls(delta):
 
 	input.x = Input.get_axis("move_left", "move_right")
 	input.z = Input.get_axis("move_forward", "move_back")
-	
+
 	if left_xr_controller:
 		var joystick_value = left_xr_controller.get_vector2("primary")
 		input.x += joystick_value.x

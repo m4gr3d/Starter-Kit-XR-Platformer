@@ -16,7 +16,7 @@ func _ready() -> void:
 
 func _on_switch_button_pressed() -> void:
 	switch_mode(data)
-	
+
 func switch_mode(switch_data:Dictionary) -> void:
 	var data_string := JSON.stringify(switch_data)
 
@@ -31,4 +31,3 @@ func switch_mode(switch_data:Dictionary) -> void:
 
 	if not success:
 		print("Unable to toggle hybrid app mode.")
-	

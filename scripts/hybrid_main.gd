@@ -21,10 +21,10 @@ func _ready() -> void:
 		# Only call StartXR._ready() when we know that OpenXR is initialized,
 		# because it'll quit the whole app if it isn't.
 		super._ready()
-		
+
 		player.left_xr_controller = left_xr_controller
 		player.right_xr_controller = right_xr_controller
-		
+
 		panel_switcher_layer = PanelSwitcherLayerScene.instantiate()
 		add_child(panel_switcher_layer)
 		panel_switcher = panel_switcher_layer.get_panel_switcher()
@@ -32,10 +32,10 @@ func _ready() -> void:
 		# Panel mode
 		player.left_xr_controller = null
 		player.right_xr_controller = null
-		
+
 		panel_switcher = PanelSwitcherScene.instantiate()
 		add_child(panel_switcher)
-	
+
 	print("Is hybrid app: ", OpenXRHybridApp.is_hybrid_app())
 	print("Hybrid App mode: ", OpenXRHybridApp.get_mode())
 

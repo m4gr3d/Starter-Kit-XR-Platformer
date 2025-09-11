@@ -10,7 +10,7 @@
 offset_top = -300.0
 offset_bottom = 0.0
 scale = Vector2(1.15, 1.15)
-joystick_mode = 1
+joystick_mode = 2
 visibility_mode = 1
 action_left = "move_left"
 action_right = "move_right"
@@ -27,7 +27,7 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 0
 scale = Vector2(1.15, 1.15)
-joystick_mode = 1
+joystick_mode = 2
 visibility_mode = 1
 action_left = "camera_left"
 action_right = "camera_right"
