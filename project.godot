@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="Starter Kit 3D Platformer"
 config/tags=PackedStringArray("starterkit")
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="uid://gip61hpett2r"
 config/features=PackedStringArray("4.7", "Forward Plus")
 boot_splash/bg_color=Color(0.92549, 0.92549, 0.960784, 1)
 boot_splash/image="res://splash-screen.png"
@@ -119,3 +119,9 @@ common/physics_interpolation=true
 
 textures/vram_compression/import_etc2_astc=true
 anti_aliasing/quality/screen_space_aa=1
+
+[xr]
+
+openxr/enabled=true
+openxr/extensions/volume/bounds=Vector3(2, 1, 1)
+shaders/enabled=true

@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://gip61hpett2r"]
+
+[ext_resource type="PackedScene" uid="uid://bqqgyqafm7xwp" path="res://scenes/main.tscn" id="1_1fyq6"]
+[ext_resource type="Script" uid="uid://bd75dv0qbx3l2" path="res://scripts/xr_main.gd" id="1_bfvqv"]
+[ext_resource type="PackedScene" uid="uid://df502krdp6gav" path="res://addons/spatialize/input/controller_input.tscn" id="2_3carf"]
+[ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="3_qwytd"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_swsrw"]
+size = Vector3(1.0527344, 0.88134766, 0.7677002)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mfdrb"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.2784314)
+
+[node name="XrMain" type="Node3D" unique_id=435380868]
+script = ExtResource("1_bfvqv")
+
+[node name="VolumePortal" type="MeshInstance3D" parent="." unique_id=1360613938]
+transform = Transform3D(25, 0, 0, 0, 10, 0, 0, 0, 20, 0, 0, 0)
+visible = false
+mesh = SubResource("BoxMesh_swsrw")
+surface_material_override/0 = SubResource("StandardMaterial3D_mfdrb")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=827745128]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D" unique_id=1564529638]
+
+[node name="LeftXRController3D" type="XRController3D" parent="XROrigin3D" unique_id=1910286041]
+tracker = &"left_hand"
+
+[node name="RightXRController3D" type="XRController3D" parent="XROrigin3D" unique_id=1247267188]
+tracker = &"right_hand"
+
+[node name="GameWorld" type="Node3D" parent="." unique_id=2088456053]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.297695, -7.2925835, 0)
+
+[node name="Main" parent="GameWorld" unique_id=416583361 instance=ExtResource("1_1fyq6")]
+
+[node name="ControllerInput" parent="." unique_id=100622756 instance=ExtResource("2_3carf")]
+
+[node name="StartXR" parent="." unique_id=1327184736 instance=ExtResource("3_qwytd")]
+enable_passthrough = true
