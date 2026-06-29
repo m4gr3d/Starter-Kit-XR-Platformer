@@ -25,7 +25,46 @@ var coins = 0
 @onready var model = $Character
 @onready var animation = $Character/AnimationPlayer
 
+const TRACKPAD_DEADZONE = 0.05
+var xr_trackpad: XRController3D = null
+var xr_trackpad_touched := false
+var xr_trackpad_origin := Vector2(0, 0)
+
 # Functions
+
+func _ready() -> void:
+	xr_trackpad =  get_node_or_null("/root/XrMain/XROrigin3D/SpatialTrackpad")
+	if not xr_trackpad:
+		printerr("FHK - Unable to retrieve xr trackpad")
+	else:
+		print("FHK - Connecting to xr trackpad...")
+		xr_trackpad.button_pressed.connect(_on_spatial_trackpad_button_pressed)
+		xr_trackpad.button_released.connect(_on_spatial_trackpad_button_released)
+		xr_trackpad.input_float_changed.connect(_on_spatial_trackpad_input_float_changed)
+
+func _on_spatial_trackpad_button_pressed(action_name: String) -> void:
+	if action_name == "primary_touch":
+		xr_trackpad_touched = true
+		xr_trackpad_origin = xr_trackpad.get_vector2("primary")
+
+func _on_spatial_trackpad_button_released(action_name: String) -> void:
+	if action_name == "primary_touch":
+		xr_trackpad_touched = false
+	
+	if action_name == "ax_button":
+		if jump_single or jump_double:
+			jump()
+
+var jump_triggered = false
+func _on_spatial_trackpad_input_float_changed(action_name: String, value: float) -> void:
+	if action_name == "trigger":
+		if value >= 0.25:
+			if not jump_triggered:
+				if jump_single or jump_double:
+					jump()
+				jump_triggered = true
+		else:
+			jump_triggered = false
 
 func _physics_process(delta):
 
@@ -112,8 +151,15 @@ func handle_controls(delta):
 
 	input.x = Input.get_axis("move_left", "move_right")
 	input.z = Input.get_axis("move_forward", "move_back")
-
 	input = input.rotated(Vector3.UP, view.rotation.y)
+	
+	if xr_trackpad and xr_trackpad_touched:
+			var current_pos = xr_trackpad.get_vector2("primary")
+			var delta_pos = current_pos - xr_trackpad_origin
+			if abs(delta_pos.x) >= TRACKPAD_DEADZONE:
+				input.x += 3 * delta_pos.x
+			if abs(delta_pos.y) >= TRACKPAD_DEADZONE:
+				input.z += 3 * delta_pos.y
 
 	if input.length() > 1:
 		input = input.normalized()

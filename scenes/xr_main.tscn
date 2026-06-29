@@ -31,6 +31,10 @@ tracker = &"left_hand"
 [node name="RightXRController3D" type="XRController3D" parent="XROrigin3D" unique_id=1247267188]
 tracker = &"right_hand"
 
+[node name="SpatialTrackpad" type="XRController3D" parent="XROrigin3D" unique_id=1008806334]
+tracker = &"/user/spatial_trackpad"
+show_when_tracked = true
+
 [node name="GameWorld" type="Node3D" parent="." unique_id=2088456053]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.297695, -7.2925835, 0)
 

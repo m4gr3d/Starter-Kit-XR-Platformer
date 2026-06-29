@@ -9,16 +9,16 @@ func _ready() -> void:
 		printerr("FHK - Unable to access xr interface...")
 		return
 	
-	var volume_ext = OpenXRVolumeExtension
+	var volume_ext = OpenXRSpatialContainerExtension
 	if volume_ext:
-		volume_ext.volume_bounds_changed.connect(_on_volume_bounds_changed)
+		volume_ext.spatial_container_bounds_changed.connect(_on_volume_bounds_changed)
 		
-		var volume_bounds = volume_ext.get_volume_bounds()
+		var volume_bounds = volume_ext.get_spatial_container_bounds()
 		_update_scale(volume_bounds)
 	else:
 		printerr("FHK - Unable to access volume extension.")
 
-func _on_volume_bounds_changed(volume_rid: RID, volume_infinite_bounds: bool, updated_bounds: Vector3):
+func _on_volume_bounds_changed(_volume_rid: RID, _volume_infinite_bounds: bool, updated_bounds: Vector3):
 	print("FHK - On volume bounds changed...")
 	_update_scale(updated_bounds)
 
